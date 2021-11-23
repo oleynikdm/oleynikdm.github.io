@@ -1,0 +1,207 @@
+---
+layout: post
+title:  "Geometry"
+date:   2021-11-22 11:00:03 +0200
+categories: inheritance
+---
+```Java
+public abstract class Geometry {
+    public abstract double getArea() throws Exception;
+    public abstract double getPerimeter() throws Exception;
+
+    public boolean isRealSize(double size) throws Exception {
+        if (size <= 0) {
+            throw new Exception("Size should be greater than zero!");
+        }
+        return true;
+    }
+}
+```
+---
+```Java
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Square SQ = new Square();
+        SQ.setSideSize(10);
+
+        System.out.println("Area: " + SQ.getArea());
+        System.out.println("Perimeter: " + SQ.getPerimeter());
+
+    }
+
+}
+```
+---
+```Java
+
+
+public class Rectangle extends Geometry {
+    protected double height = 0;
+    protected double width = 0;
+    public void setHeight(double h) throws Exception {
+        if (this.isRealSize(h)) {
+            this.height = h;
+        }
+    }
+    public void setWidth(double w) throws Exception {
+        if (this.isRealSize(w)) {
+            this.width = w;
+        }
+    }
+
+    public double getArea() throws Exception {
+        this.isAllParametersAvailable();
+        return this.height * this.width;
+
+    }
+
+    public double getPerimeter() throws Exception {
+        this.isAllParametersAvailable();
+        return 2 * this.height + 2 * this.width;
+    }
+
+    private void isAllParametersAvailable() throws Exception {
+        if (this.height <= 0 || this.width <= 0 ) {
+            throw new Exception("First you should set width and height!");
+        }
+    }
+}
+```
+---
+```Java
+
+public class Rhombus extends Rectangle{
+    public void setSideSize(double sSize) throws Exception {
+        this.setHeight(sSize);
+        this.setWidth(sSize);
+    }
+}
+```
+---
+```Java
+
+public class Circle extends Ellipse {
+    public void setDiameter(double sSize) throws Exception {
+        this.setHeight(sSize);
+        this.setWidth(sSize);
+    }
+}
+
+```
+---
+```Java
+
+public class Square extends Rectangle {
+    public void setSideSize(double sSize) throws Exception {
+        this.setHeight(sSize);
+        this.setWidth(sSize);
+    }
+}
+```	
+---
+```
+public class Triangle extends Geometry {
+    private double side_a = 0;
+    private double side_b = 0;
+    private double side_c = 0;
+
+    public void setSideA(double size) throws Exception {
+        this.isRealSize(size);
+        this.side_a = size;
+    }
+
+    public void setSideB(double size) throws Exception {
+        this.isRealSize(size);
+        this.side_b = size;
+    }
+
+    public void setSideC(double size) throws Exception {
+        this.isRealSize(size);
+        this.side_c = size;
+    }
+
+
+    private void isAllParametersAvailable() throws Exception {
+        if (this.side_a <= 0 || this.side_b <= 0  || this.side_c <= 0) {
+            throw new Exception("First you should set width and height!");
+        }
+    }
+
+    public double getArea() {
+        double p = this.getPerimeter() / 2;
+        return Math.sqrt(p * (p - this.side_a) * (p - this.side_b) * (p - this.side_c));
+    }
+    public double getPerimeter() {
+        return this.side_a + this.side_b + this.side_c;
+    }
+}
+```
+---
+```Java
+
+public class Ellipse extends Geometry {
+    protected double height = 0;
+    protected double width = 0;
+    public void setHeight(double h) throws Exception {
+        if (this.isRealSize(h)) {
+            this.height = h;
+        }
+    }
+    public void setWidth(double w) throws Exception {
+        if (this.isRealSize(w)) {
+            this.width = w;
+        }
+    }
+
+
+    public double getArea() throws Exception {
+        this.isAllParametersAvailable();
+        return Math.PI * this.width / 2 * this.height / 2;
+    }
+    public double getPerimeter() throws Exception {
+        this.isAllParametersAvailable();
+        return 4 * (Math.PI * this.width * this.height + (Math.max(this.width, this.height) - Math.min(this.width, this.height)))/(this.width + this.height) ;
+    }
+
+
+    private void isAllParametersAvailable() throws Exception {
+        if (this.height <= 0 || this.width <= 0 ) {
+            throw new Exception("First you should set width and height!");
+        }
+    }
+}
+```
+---	
+```Java
+
+public class Parallelogram extends Rectangle {
+    private double angle = 0;
+
+    public void setAcuteAngle(double angle) throws Exception {
+        this.isRealSize(angle);
+        this.angle = angle;
+    }
+
+    public double getArea() throws Exception {
+        this.isAllParametersAvailable();
+        if (this.angle > 0) {
+            return this.height * this.width * Math.sin(this.angle);
+        } else {
+            return this.height * this.width;
+        }
+    }
+
+    private void isAllParametersAvailable() throws Exception {
+        if ((this.height <= 0 && this.angle <= 0) || this.width <= 0 ) {
+            throw new Exception("First you should set width and height or width and acute angle!");
+        }
+    }
+}
+```
+---
+
+
+
+
+[jekyll-gh]:  https://github.com/oleynikdm/oleynikdm.github.io
