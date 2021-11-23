@@ -1,0 +1,5 @@
+I"£<p>```Java
+public abstract class Geometry {
+    public abstract double getArea() throws Exception;
+    public abstract double getPerimeter() throws Exception;</p>
+:ET
